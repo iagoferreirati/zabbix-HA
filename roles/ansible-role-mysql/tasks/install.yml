@@ -1,0 +1,15 @@
+---
+- name: Install mysql packages
+  yum:
+    name: "{{ mysql_packages }}"
+    state: present
+
+- name: Install pymysql CentOS
+  pip: name=pymysql state=present
+
+- name: Start mysql service
+  service:
+    name: mysqld
+    state: started
+    enabled: true
+...

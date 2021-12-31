@@ -1,0 +1,23 @@
+---
+- name: Disable SELinux
+  selinux:
+    state: disabled
+
+- name: Set a hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Install Zabbix Repository CentOS
+  yum: 
+    name: https://repo.zabbix.com/zabbix/{{ zabbix_release }}/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/zabbix-release-{{ zabbix_version }}.el{{ ansible_distribution_major_version }}.noarch.rpm
+    state: present
+    disable_gpg_check: yes
+
+- name: Install packages Zabbix CentOS
+  yum:
+    name: "{{ zabbix_agent_package }}"
+    state: latest
+
+- name: Install pymysql CentOS
+  pip: name=pymysql state=present
+...

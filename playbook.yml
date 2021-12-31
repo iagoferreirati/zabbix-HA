@@ -1,0 +1,11 @@
+---
+- hosts: node1
+  become: true
+  roles:
+    - ansible-role-mysql
+    - ansible-role-zabbix-server
+
+- hosts: node2
+  become: true
+  roles:
+    - ansible-role-zabbix-server-without-db
